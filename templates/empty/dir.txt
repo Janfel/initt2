@@ -1,0 +1,6 @@
+src
+doc
+bin
+tests
+scripts
+configs

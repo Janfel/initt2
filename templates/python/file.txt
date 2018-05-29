@@ -1,0 +1,4 @@
+{{name}}/__init__.py
+{{name}}/tests/__init__.py
+setup.py
+README.md

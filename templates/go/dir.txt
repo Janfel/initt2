@@ -1,0 +1,9 @@
+bin
+cmd/{{name}}
+internal/app/{{name}}
+internal/pkg
+pkg
+doc
+test
+scripts
+config
