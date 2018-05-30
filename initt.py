@@ -52,7 +52,7 @@ if __name__ == '__main__':
     if FILE_TXT.exists():
         with open(FILE_TXT) as ftxt:
             for line in ftxt:
-                open(line.rstrip('\n'), 'a').close()
+                Path(line.rstrip('\n')).touch()
 
     if INIT_SH.exists():
         subcall([str(INIT_SH.resolve()), ARGS.name])

@@ -6,9 +6,10 @@ EXT := initt.txz
 ZIP := tar cJf
 TEMPLATES := empty go python
 
+
 $(phony all): $(DEST)/$(TEMPLATES).$(EXT)
 
-$(DEST)/%.$(EXT): $(SRC)/%
+$(DEST)/$(foreach).$(EXT): $(SRC)/$(foreach) : foreach $(TEMPLATES)
 	cd "$(input)" \
 	&& $(ZIP) "._outputfile_." *
 	&mv "$(input)/._outputfile_." "$(output)"
@@ -16,20 +17,18 @@ $(DEST)/%.$(EXT): $(SRC)/%
 $(phony test): all
 	./test.sh
 
-$(phony userinstall): all
+$(phony install): all
 	&install -d $(HOME)/.local/share/initt
 	&install -c templates-bin/$(TEMPLATES).$(EXT) $(HOME)/.local/share/initt/
 	&install -d $(HOME)/.local/bin
 	&install -c initt.py $(HOME)/.local/bin/initt
-	&install -c initt-zip.sh $(HOME)/.local/bin/initt-zip
 	@&echo "Please make sure that $(HOME)/.local/bin is on your $$PATH"
 
-$(phony install): all
+$(phony systeminstall): all
 	&install -d /usr/share/initt/templates
 	&install -c templates-bin/$(TEMPLATES).$(EXT) /usr/share/initt/templates
 	&install -d /usr/bin
 	&install -c initt.py /usr/bin/initt
-	@&install -c initt-zip.sh /usr/bin/initt-zip
 
 $(phony uninstall):
 	&uninstall
