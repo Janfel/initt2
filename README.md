@@ -21,7 +21,6 @@ You can install init-templates either manually or with a script.
 Makepp most likely will not be installed on your system, neither will you find it in your distributions repositories. You can get it from:
 - [The official website](https://makepp.sourceforge.net)
 - [CPAN](https://metacpan.org/release/makepp)
-- My personal [PKGBUILD]() (Arch Linux and derivatives only)
 
 ## Manual Installation
 1. Clone or download this repo `makepp install`
