@@ -17,7 +17,7 @@ $(DEST)/$(foreach).$(EXT): $(SRC)/$(foreach) : foreach $(TEMPLATES)
 $(phony test): all
 	scripts/test.sh
 
-$(phony userinstall): all
+$(phony uinstall): all
 	&install -d $(HOME)/.local/share/initt
 	&install -c templates-bin/$(TEMPLATES).$(EXT) $(HOME)/.local/share/initt/
 	&install -d $(HOME)/.local/bin

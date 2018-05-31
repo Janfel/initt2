@@ -30,12 +30,12 @@ $ git clone "https://github.com/Janfel/initt2.git" initt
 $ cd initt
 ```
 
-2. Run `makepp install` or `makepp userinstall` (Standard $PREFIX is /usr)
+2. Run `makepp install` or `makepp uinstall` (Standard $PREFIX is /usr)
 ```
 $ makepp install
 ```
 
-2. If you installed locally, add `~/bin/` to your `$PATH`
+3. If you installed locally with `makepp uinstall`, add `~/bin/` to your `$PATH`
 
 # Usage
 
