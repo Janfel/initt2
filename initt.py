@@ -2,10 +2,11 @@
 '''Utility for initializing project directories'''
 
 import os
+from typing import Dict
 from argparse import ArgumentParser
 from tarfile import open as taropen
 from subprocess import call as subcall
-from pathlib import Path, PosixPath
+from pathlib import Path
 
 
 TEMPLATE_PATHS = [
@@ -18,11 +19,12 @@ FILE_TXT = Path('file.txt')
 INIT_SH = Path('init.sh')
 
 
-def templates() -> {str, PosixPath}:
+def templates() -> Dict[str, Path]:
     '''Returns a dict of Pathnames and -objects'''
     temp = [arg.joinpath(x) for arg in TEMPLATE_PATHS if arg.exists()
             for x in arg.iterdir()]
-    return {os.path.splitext(x.stem)[0]: x for x in temp if not x.is_dir() and not x.match('Makeppfile')}
+    return {os.path.splitext(x.stem)[0]: x for x in temp
+            if not x.is_dir() and not x.match('Makeppfile')}
 
 
 if __name__ == '__main__':
@@ -38,7 +40,7 @@ if __name__ == '__main__':
         os.makedirs(ARGS.name)
         os.chdir(ARGS.name)
     else:
-        ARGS.name = os.path.basename(Path('.').resolve())
+        ARGS.name = os.path.basename(str(Path('.').resolve()))
 
     TEMPLATE = templates()[ARGS.templatename]
     with taropen(TEMPLATE, mode='r') as templtar:
