@@ -4,14 +4,11 @@ src="templates"
 dest="templates-bin"
 ext="initt.txz"
 cwd="$PWD"
-zip="tar cJf"
+zip="scripts/initt-zip.sh"
 
 for dir in $(ls "$src")
 do
-    (
-    cd "$src/$dir" \
-    && $zip "$dir.$ext" *
-    )
+    $zip "$src/$dir"
 done
 
 mv "$src"/*/*."$ext" "$dest"

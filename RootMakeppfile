@@ -1,5 +1,7 @@
 #
 
+PREFIX := /usr
+
 SRC := templates
 DEST := templates-bin
 EXT := initt.txz
@@ -10,25 +12,26 @@ TEMPLATES := empty go python
 $(phony all): $(DEST)/$(TEMPLATES).$(EXT)
 
 $(DEST)/$(foreach).$(EXT): $(SRC)/$(foreach) : foreach $(TEMPLATES)
-	cd "$(input)" \
-	&& $(ZIP) "._outputfile_." *
-	&mv "$(input)/._outputfile_." "$(output)"
+	scripts/zipper.sh
 
 $(phony test): all
-	./test.sh
+	scripts/test.sh
 
-$(phony install): all
+$(phony userinstall): all
 	&install -d $(HOME)/.local/share/initt
 	&install -c templates-bin/$(TEMPLATES).$(EXT) $(HOME)/.local/share/initt/
 	&install -d $(HOME)/.local/bin
 	&install -c initt.py $(HOME)/.local/bin/initt
+	&install -c scripts/initt-zip.sh $(HOME)/.local/bin/initt-zip
 	@&echo "Please make sure that $(HOME)/.local/bin is on your $$PATH"
 
-$(phony systeminstall): all
-	&install -d /usr/share/initt/templates
-	&install -c templates-bin/$(TEMPLATES).$(EXT) /usr/share/initt/templates
-	&install -d /usr/bin
-	&install -c initt.py /usr/bin/initt
+$(phony install): all
+	&install -d $(PREFIX)/share/initt/templates
+	&install -c templates-bin/$(TEMPLATES).$(EXT) $(PREFIX)/share/initt/templates
+	&install -d $(PREFIX)/bin
+	&install -c initt.py $(PREFIX)/bin/initt
+	&install -c scripts/initt-zip.sh $(PREFIX)/bin/initt-zip
+
 
 $(phony uninstall):
 	&uninstall

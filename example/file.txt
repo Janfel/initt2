@@ -1,0 +1,2 @@
+bazfile
+bardir/quxfile

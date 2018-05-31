@@ -12,7 +12,8 @@ from pathlib import Path
 TEMPLATE_PATHS = [
     Path('./templates-bin').resolve(),
     Path('~/.local/share/initt').expanduser(),
-    Path('/usr/share/initt/templates')
+    Path('/usr/share/initt/templates'),
+    Path('/ usr/local/share/initt/templates')
 ]
 DIR_TXT = Path('dir.txt')
 FILE_TXT = Path('file.txt')
